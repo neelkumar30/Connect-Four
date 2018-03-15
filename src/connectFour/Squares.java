@@ -1,0 +1,27 @@
+package connectFour;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+
+public class Squares extends JButton implements ActionListener {
+	int x;
+	int y;
+	int size;
+	Squares(int x, int y, int size){
+		this.x = x;
+		this.y = y;
+		this.size = size;
+		setBounds(x, y, size, size);
+		addActionListener(this);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("hi");
+	}
+
+}
