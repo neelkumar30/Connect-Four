@@ -26,7 +26,7 @@ public class GamePanel extends JPanel {
 			buttons.setForeground(Color.BLUE);
 			buttons.setContentAreaFilled(false);
 			for (int j = 0; j < 6; j++) {
-				holders.add(new ChipHolder(i * 50, j * 50, false));
+				holders.add(new ChipHolder(i * 100 + 62, j * 100 + 112, false));
 			}
 		}
 		manager = new ObjectManager(holders, squares);

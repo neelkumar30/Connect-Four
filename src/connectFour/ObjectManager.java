@@ -22,7 +22,7 @@ public class ObjectManager extends JPanel implements ActionListener  {
 	}
 	public void draw(Graphics g) {
 		g.setColor(Color.BLUE);
-		g.fillRect(50, 100, 700, 600);
+		g.fill3DRect(50, 100, 700, 600, true);
 		g.setColor(Color.black);
 		
 		//drawing lines
