@@ -2,16 +2,21 @@ package connectFour;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements ActionListener {
 
 	ArrayList<Squares> squares;
 	ArrayList<ChipHolder> holders;
-	ObjectManager manager;
+	View manager;
+	Model model = new Model();
+	final static int player1 = 1;
+	final static int player2 = 2;
+	int player = player1;
 
 	GamePanel() {
 		setLayout(null);
@@ -20,6 +25,7 @@ public class GamePanel extends JPanel {
 		for (int i = 0; i < 7; i++) {
 			Squares buttons = new Squares(50 + i * 100, 100, 100);
 			squares.add(buttons);
+			buttons.addActionListener(this);
 			add(buttons);
 			buttons.setBackground(Color.BLUE);
 			buttons.setOpaque(true);
@@ -29,18 +35,37 @@ public class GamePanel extends JPanel {
 				holders.add(new ChipHolder(i * 100 + 62, j * 100 + 112, false));
 			}
 		}
-		manager = new ObjectManager(holders, squares);
+		manager = new View(holders, squares);
+		manager.setBoard(model.board);
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		manager.draw(g);
-		// for (int i = 0; i < 7; i++) {
-		// for (int j = 0; j < 6; j++) {
-		// g.setColor(Color.WHITE);
-		// g.fillOval(100*i + 62, 612 - 100*j, 75, 75);
-		// }
-		// }
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < 7; i++) {
+			if (e.getSource() == squares.get(i)) {
+				boolean successful = model.playMove(i, player);
+				if (successful == true) {
+					switchPlayers();
+					model.printModel();
+					manager.repaint();
+				}
+			}
+		}
+	}
+
+	public void switchPlayers() {
+		if (player == player1) {
+			player = player2;
+		} else {
+			player = player1;
+		}
+
 	}
 }

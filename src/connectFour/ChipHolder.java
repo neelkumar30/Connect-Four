@@ -1,20 +1,24 @@
 package connectFour;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class ChipHolder {
 	int x;
 	int y;
 	boolean isFilled;
-	
-	public ChipHolder(int x, int y, boolean isFilled){
+
+	public ChipHolder(int x, int y, boolean isFilled) {
 		this.x = x;
 		this.y = y;
 		this.isFilled = isFilled;
 	}
-	
+
 	public void draw(Graphics g) {
-		g.fillOval(x, y, 75, 75);
+		if (isFilled)
+			g.setColor(Color.BLACK);
+		else
+			g.fillOval(x, y, 75, 75);
 	}
 
 	public int getX() {
@@ -40,5 +44,5 @@ public class ChipHolder {
 	public void setFilled(boolean isFilled) {
 		this.isFilled = isFilled;
 	}
-	
+
 }
