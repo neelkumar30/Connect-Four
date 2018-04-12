@@ -38,14 +38,16 @@ public class View extends JPanel {
 		for (ChipHolder h : holders) {
 			h.draw(g);
 		}
-
+		
 		for (int row = 0; row < 6; row++) {
-			for (int col = 0; col < 7; col++) {
+			for (int col = 0; col < 7; col++) {	
 				if (board[row][col] == 1) {
-					holders.get(row).setFilled(true);
+					g.setColor(Color.RED);
+					 g.fillOval(col*100 + 62, row*100 + 112, 75, 75);
+					//holders.get(row).setFilled(true);
 				} else if (board[row][col] == 2) {
 					g.setColor(Color.YELLOW);
-					// g.fillOval(row * 100 + 62, col * 62 + 100, 75, 75);
+					 g.fillOval(col*100 + 62, row*100 + 112, 75, 75);
 				}
 			}
 		}

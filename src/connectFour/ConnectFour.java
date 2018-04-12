@@ -20,9 +20,9 @@ package connectFour;
 			frame.setVisible(true);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.getContentPane().setPreferredSize(new Dimension(width, length));
-			frame.pack();
-			frame.add(panel);
 			
+			frame.add(panel);
+			frame.pack();
 		}
 
 		public static void main(String[] args) {

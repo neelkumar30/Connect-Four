@@ -6,6 +6,8 @@ public class Model {
 
 	public static void main(String[] args) {
 	}
+	
+	
 
 	public boolean playMove(int column, int player) {
 

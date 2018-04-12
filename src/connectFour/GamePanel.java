@@ -37,6 +37,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 		manager = new View(holders, squares);
 		manager.setBoard(model.board);
+		add(manager);
 	}
 
 	@Override
@@ -54,9 +55,10 @@ public class GamePanel extends JPanel implements ActionListener {
 				if (successful == true) {
 					switchPlayers();
 					model.printModel();
-					manager.repaint();
+					repaint();
 				}
 			}
+			
 		}
 	}
 
