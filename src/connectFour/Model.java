@@ -6,6 +6,8 @@ public class Model {
 	int[][] board = new int[6][7];
 	public int movesPlayed = 0;
 	public int count = 0;
+	boolean player1Won = false;
+	boolean player2Won = false;
 
 	public static void main(String[] args) {
 	}
@@ -21,14 +23,24 @@ public class Model {
 			} else {
 				board[i - 1][column] = player;
 				if(checkForWin(i - 1, column, player)) {
-					JOptionPane.showMessageDialog(null, "Player" + player + " WON!!!");
+					if(player == 1) {
+						player1Won = true;
+					}
+					if(player == 2) {
+						player2Won = true;
+					}
 				}
 				return true;
 			}
 		}
 		board[board.length - 1][column] = player;
 		if(checkForWin(board.length - 1, column, player)){
-			JOptionPane.showMessageDialog(null, "Player" + player + " WON!!!");
+			if(player == 1) {
+				player1Won = true;
+			}
+			if(player == 2) {
+				player2Won = true;
+			}
 		}
 		return true;
 	}
@@ -39,14 +51,20 @@ public class Model {
 				System.out.print(board[i][j] + "    ");
 			}
 			System.out.println("");
+			if(player1Won == true) {
+				JOptionPane.showMessageDialog(null, "Red WON!!!");
+			}
+			if(player2Won == true) {
+				JOptionPane.showMessageDialog(null, "Yellow WON!!!");
+			}
 		}
 		System.out.println("");
 	}
 
 	boolean checkForWin(int row, int column, int player) {
-		if (board[row][column + 1] == player) {
+		if (row < board.length && column < board[0].length -1 && board[row][column + 1] == player) {
 			for (int i = 0; i < board[0].length - column; i++) {
-				if (board[row][column + i] == player) {
+				if (row < board.length && column < board[0].length && board[row][column + i] == player) {
 					count = count + 1;
 					continue;
 				} else {
@@ -59,9 +77,9 @@ public class Model {
 			}
 
 		}
-		if (board[row][column - 1] == player) {
+		if (row < board.length  && column >0 && board[row][column - 1] == player) {
 			for (int i = 0; i < column; i++) {
-				if (board[row][column - i] == player) {
+				if (row < board.length && column > 0 && board[row][column - i] == player) {
 					count = count + 1;
 					continue;
 				} else {
@@ -74,9 +92,9 @@ public class Model {
 			}
 		}
 
-		if (board[row - 1][column] == player) {
+		if (row >0 && column < board[0].length && board[row - 1][column] == player) {
 			for (int i = 0; i < board.length - row; i++) {
-				if (board[row + i][column] == player) {
+				if (row < board.length && column < board[0].length && board[row + i][column] == player) {
 					count = count + 1;
 					continue;
 				} else {
@@ -90,9 +108,9 @@ public class Model {
 
 		}
 
-		if (board[row - 1][column + 1] == player) {
+		if (row >0 && column < board[0].length -1 && board[row - 1][column + 1] == player) {
 			for (int i = 0; i < 8; i++) {
-				if (board[row - i][column + i] == player && row < board.length && column < board[0].length) {
+				if (row < board.length && column < board[0].length && board[row - i][column + i] == player ) {
 					count = count + 1;
 					continue;
 				} else {
@@ -105,9 +123,9 @@ public class Model {
 			}
 
 		}
-		if (board[row + 1][column - 1] == player) {
+		if (row < board.length -1 && column >0  && board[row + 1][column - 1] == player) {
 			for (int i = 0; i < 8; i++) {
-				if (board[row + 1][column - 1] == player && row < board.length && column < board[0].length) {
+				if (row < board.length && column < board[0].length && board[row + 1][column - 1] == player ) {
 					count = count + 1;
 					continue;
 				} else {
@@ -121,9 +139,9 @@ public class Model {
 			}
 
 		}
-		if (board[row - 1][column - 1] == player) {
+		if (row >0 && column >0 && board[row - 1][column - 1] == player) {
 			for (int i = 0; i < 8; i++) {
-				if (board[row - i][column - i] == player && row < board.length && column < board[0].length) {
+				if (row < board.length && column < board[0].length && board[row - i][column - i] == player ) {
 					count = count + 1;
 					continue;
 				} else {
@@ -136,9 +154,9 @@ public class Model {
 			}
 
 		}
-		if (board[row + 1][column + 1] == player) {
+		if (row < board.length -1 && column < board[0].length -1 && board[row + 1][column + 1] == player) {
 			for (int i = 0; i < 8; i++) {
-				if (board[row + 1][column - 1] == player && row < board.length && column < board[0].length) {
+				if (row < board.length && column < board[0].length && board[row + 1][column - 1] == player ) {
 					count = count + 1;
 					continue;
 				} else {
