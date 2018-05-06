@@ -53,6 +53,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			if (e.getSource() == squares.get(i)) {
 				boolean successful = model.playMove(i, player);
 				if (successful == true) {
+					
 					switchPlayers();
 					model.printModel();
 					repaint();
