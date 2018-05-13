@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements ActionListener {
@@ -53,13 +54,52 @@ public class GamePanel extends JPanel implements ActionListener {
 			if (e.getSource() == squares.get(i)) {
 				boolean successful = model.playMove(i, player);
 				if (successful == true) {
-					
+
 					switchPlayers();
 					model.printModel();
 					repaint();
 				}
 			}
+
+		}
+		if (model.isPlayer1Won()) {
 			
+			new Thread(()->
+			{
+			JOptionPane.showMessageDialog(null, "Red WON!!!");
+			int restart = JOptionPane.showOptionDialog(null, "Do you want to play again?", "Game Over", JOptionPane.YES_NO_OPTION,
+			JOptionPane.INFORMATION_MESSAGE, null, new String[] { "Yes", "No" }, null);
+			if(restart == 0) {
+				model.Reset();
+				manager.setBoard(model.getBoard());
+				repaint();
+			}
+			else {
+				System.exit(0);;
+			}
+			}
+			).start();
+			
+		}
+
+		if (model.isPlayer2Won()) {
+			new Thread(()->
+			{
+			JOptionPane.showMessageDialog(null, "Yellow WON!!!");
+			int restart = JOptionPane.showOptionDialog(null, "Do you want to play again?", "Game Over", JOptionPane.YES_NO_OPTION,
+			JOptionPane.INFORMATION_MESSAGE, null, new String[] { "Yes", "No" }, null);
+			if(restart == 0) {
+				model.Reset();
+				manager.setBoard(model.getBoard());
+				repaint();
+			}
+			else {
+				System.exit(0);;
+			}
+			
+			}
+			).start();
+
 		}
 	}
 

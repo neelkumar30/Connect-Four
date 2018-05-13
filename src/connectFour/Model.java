@@ -7,6 +7,24 @@ public class Model {
 	public int movesPlayed = 0;
 	boolean player1Won = false;
 	boolean player2Won = false;
+	
+	
+
+	public boolean isPlayer1Won() {
+		return player1Won;
+	}
+
+	public void setPlayer1Won(boolean player1Won) {
+		this.player1Won = player1Won;
+	}
+
+	public boolean isPlayer2Won() {
+		return player2Won;
+	}
+
+	public void setPlayer2Won(boolean player2Won) {
+		this.player2Won = player2Won;
+	}
 
 	public boolean playMove(int column, int player) {
 
@@ -18,6 +36,17 @@ public class Model {
 				continue;
 			} else {
 				board[i - 1][column] = player;
+				if(checkForWin(i-1, column, player)) {
+					if(player == 1) {
+						player1Won = true;
+						System.out.println("RED WINS!!!");
+					}
+					if(player == 2) {
+						player2Won = true;
+						System.out.println("YELLOW WINS!!!");
+						
+					}
+				}
 			}
 			return true;
 		}
@@ -80,6 +109,7 @@ public class Model {
 				}
 			}
 		}
+		count = 0;
 		if (row < board.length - 1 && column < board[0].length && board[row + 1][column] == player) {
 			for (int i = 0; i < board.length; i++) {
 				if (row + i < board.length && column < board[0].length && board[row + i][column] == player) {
@@ -95,7 +125,7 @@ public class Model {
 			}
 
 		}
-
+//problem
 		if (row > 0 && column < board[0].length - 1 && board[row - 1][column + 1] == player) {
 			for (int i = 0; i < 8; i++) {
 				if (row - i > 0 && column + i < board[0].length && board[row - i][column + i] == player) {
@@ -126,6 +156,7 @@ public class Model {
 			}
 
 		}
+		count = 0;
 		if (row > 0 && column > 0 && board[row - 1][column - 1] == player) {
 			for (int i = 0; i < 8; i++) {
 				if (row - i > 0 && column - i < board[0].length && board[row - i][column - i] == player) {
@@ -159,5 +190,16 @@ public class Model {
 		}
 
 		return false;
+	}
+	
+	void Reset() {
+		board = new int[6][7];
+		player1Won = false;
+		player2Won = false;
+	}
+
+	public int[][] getBoard() {
+		// TODO Auto-generated method stub
+		return board;
 	}
 }
