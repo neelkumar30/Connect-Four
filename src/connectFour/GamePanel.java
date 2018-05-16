@@ -102,7 +102,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 		}
 	}
-
+	
 	public void switchPlayers() {
 		if (player == player1) {
 			player = player2;

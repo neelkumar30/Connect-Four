@@ -36,6 +36,10 @@ public class Model {
 				continue;
 			} else {
 				board[i - 1][column] = player;
+				movesPlayed ++;
+				if(movesPlayed == 42) {
+					JOptionPane.showMessageDialog(null, "Wow it's a draw!!!");
+				}
 				if(checkForWin(i-1, column, player)) {
 					if(player == 1) {
 						player1Won = true;
@@ -51,6 +55,10 @@ public class Model {
 			return true;
 		}
 		board[board.length - 1][column] = player;
+		movesPlayed++;
+		if(movesPlayed == 42) {
+			JOptionPane.showMessageDialog(null, "Wow it's a draw!!!");
+		}
 		if (checkForWin(board.length - 1, column, player)) {
 			if (player == 1) {
 				player1Won = true;
@@ -96,7 +104,7 @@ public class Model {
 
 		// Checks four in a row to the left horizontally
 		if (row < board.length && column > 0 && board[row][column - 1] == player) {
-			for (int i = 0; i < board[0].length; i++) {
+			for (int i = 1; i < board[0].length; i++) {
 				if (row < board.length && column - i > 0 && board[row][column - i] == player) {
 					count = count + 1;
 					if (count == 4) {
@@ -141,7 +149,7 @@ public class Model {
 
 		}
 		if (row < board.length - 1 && column > 0 && board[row + 1][column - 1] == player) {
-			for (int i = 0; i < 8; i++) {
+			for (int i = 1; i < 8; i++) {
 				if (row + i < board.length && column - i > 0 && board[row + i][column - i] == player) {
 					count = count + 1;
 					if (count == 4) {
@@ -173,7 +181,7 @@ public class Model {
 
 		}
 		if (row < board.length - 1 && column < board[0].length - 1 && board[row + 1][column + 1] == player) {
-			for (int i = 0; i < 8; i++) {
+			for (int i = 1; i < 8; i++) {
 				if (row + i < board.length && column + i < board[0].length && board[row + i][column + i] == player) {
 					count = count + 1;
 					if (count == 4) {
@@ -196,6 +204,7 @@ public class Model {
 		board = new int[6][7];
 		player1Won = false;
 		player2Won = false;
+		movesPlayed = 0;
 	}
 
 	public int[][] getBoard() {
